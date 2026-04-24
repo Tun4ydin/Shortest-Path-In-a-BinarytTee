@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <unordered_set>
+#include <algorithm>
 using namespace std;
 
 template <typename T> class Tree
@@ -98,7 +99,7 @@ public:
             cout << s[i] << endl;
         }
         cout << "Shortest Path: " << endl;
-        unsigned long int ind = 0, size = s[0].size();
+        unsigned long int ind = 0, size = count(s[0].begin(), s[0].end(), ' ');
         for(int i = 1; i < s.size(); i++)
         {
             if(s[i].size() < size)
@@ -107,7 +108,23 @@ public:
                 ind = i;
             }
         }
-        cout << s[ind] << endl;
+        for(int i = 0; i < s.size(); i++)
+        {
+            unsigned long int siz = count(s[i].begin(), s[i].end(), ' ') + 1;
+            if(siz == size)
+            {
+                indx.push_back(i);
+            }
+        }
+        for(int i = 0; i < indx.size(); i++)
+        {
+            cout << s[indx[i]];
+            if(i + 1 != indx.size())
+            {
+                cout << " or";
+            }
+            cout << endl;
+        }
     }
 };
 
